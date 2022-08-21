@@ -1,0 +1,13 @@
+require "user.options"
+require "user.keymaps"
+require "user.plugins"
+require "user.colorscheme"
+require "user.cmp"
+require "user.lualine"
+require "user.vim-slime"
+require "user.telescope"
+require "user.treesitter"
+require "user.gitsigns"
+require "user.indent-blankline"
+require "user.mason"
+
