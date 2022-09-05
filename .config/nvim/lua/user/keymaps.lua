@@ -50,9 +50,13 @@ keymap("n", "<Leader>cx","<Plug>SlimeParagraphSend", opts)
 keymap("n", "ga", "<Plug>(EasyAlign)", opts)
 
 -- Telescope
-keymap("n", "<leader>f", "<cmd>Telescope find_files<cr>", opts)
--- keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
-keymap("n", "<c-t>", "<cmd>Telescope live_grep<cr>", opts)
+keymap("n", "<leader>f", "<cmd>Telescope find_files<CR>", opts)
+-- keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<CR>", opts)
+keymap("n", "<c-t>", "<cmd>Telescope live_grep<CR>", opts)
+
+
+keymap("n", "<leader>bb", ":ls<CR>:b<space>",opts)
+keymap("n", "<leader>bd", ":bd<CR>",opts)
 
 -------------------------
 --       INSERT        --

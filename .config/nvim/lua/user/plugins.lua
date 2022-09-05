@@ -64,7 +64,7 @@ return packer.startup(function(use)
 
   use "jpalardy/vim-slime"       -- send code to another session
   use "junegunn/vim-easy-align"  -- easy alignment! 
-	use "lukas-reineke/indent-blankline.nvim" -- vertical indent lines
+  use "lukas-reineke/indent-blankline.nvim" -- vertical indent lines
   use "poliquin/stata-vim" -- Stata Highlighting
 
 	-- Colorschemes
@@ -84,8 +84,9 @@ return packer.startup(function(use)
 	use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
 
 	-- LSP
-	use "neovim/nvim-lspconfig"           -- enable LSP
-	use "williamboman/mason.nvim"         -- manage LSP installs
+	use "neovim/nvim-lspconfig"             -- enable LSP
+	use "williamboman/mason.nvim"           -- manage LSP installs
+  use "williamboman/mason-lspconfig.nvim" -- helper for mason
   -- use "williamboman/nvim-lsp-installer" -- simple to use language server installer
 	-- use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
 
@@ -107,6 +108,7 @@ return packer.startup(function(use)
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
 
+  use "lervag/vimtex"
   -- Orgmode for Neovim
   -- use {'nvim-orgmode/orgmode',
   --   -- ft = {'org'},

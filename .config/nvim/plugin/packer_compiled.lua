@@ -115,6 +115,11 @@ _G.packer_plugins = {
     path = "/Users/joshpark/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
+  ["mason-lspconfig.nvim"] = {
+    loaded = true,
+    path = "/Users/joshpark/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+    url = "https://github.com/williamboman/mason-lspconfig.nvim"
+  },
   ["mason.nvim"] = {
     loaded = true,
     path = "/Users/joshpark/.local/share/nvim/site/pack/packer/start/mason.nvim",
@@ -174,6 +179,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/joshpark/.local/share/nvim/site/pack/packer/start/vim-slime",
     url = "https://github.com/jpalardy/vim-slime"
+  },
+  vimtex = {
+    loaded = true,
+    path = "/Users/joshpark/.local/share/nvim/site/pack/packer/start/vimtex",
+    url = "https://github.com/lervag/vimtex"
   }
 }
 
