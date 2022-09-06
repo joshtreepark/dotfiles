@@ -10,4 +10,6 @@ require "user.treesitter"
 require "user.gitsigns"
 require "user.indent-blankline"
 require "user.mason"
-
+require "user.lsp" -- should come after mason
+require "user.others"
+require("functions")
