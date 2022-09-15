@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 local opts = { silent = true }
+=======
+local opts = { noremap = true, silent = true }
+>>>>>>> 57fd31541f2a70cbaca3aafb7b334d55e68f1927
 
 -- Shorten function name
 local keymap = vim.keymap.set
@@ -56,6 +60,7 @@ keymap("n", "<leader>fh", "<cmd>Telescope oldfiles<CR>", opts)
 keymap("n", "s", "<Nop>", opts)
 keymap("n", "S", "<Nop>", opts)
 
+<<<<<<< HEAD
 keymap("n", "sw", "<cmd>HopWord<CR>", opts)
 keymap("n", "sl", "<cmd>HopLineStart<CR>", opts)
 keymap("n", "sc", "<cmd>HopChar1<CR>", opts)
@@ -72,7 +77,14 @@ nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :noh
 ]])
 
 keymap("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/user/luasnip.lua<CR>")
+=======
+keymap("n", "<leader>bb", ":ls<CR>:b<space>", opts)
+keymap("n", "<leader>bd", ":bd<CR>", opts)
+>>>>>>> 57fd31541f2a70cbaca3aafb7b334d55e68f1927
 
+vim.cmd([[
+nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+]])
 -------------------------
 --       INSERT        --
 -------------------------
