@@ -1,10 +1,7 @@
-local opts = { noremap = true, silent = true }
-
-
-local term_opts = { silent = true }
+local opts = { silent = true }
 
 -- Shorten function name
-local keymap = vim.api.nvim_set_keymap
+local keymap = vim.keymap.set
 
 -- Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
@@ -19,15 +16,14 @@ vim.g.maplocalleader = " "
 --   term_mode         = "t",
 --   command_mode      = "c",
 
-
 -------------------------
 --       NORMAL        --
 -------------------------
 -- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+-- keymap("n", "<C-h>", "<C-w>h", opts)
+-- keymap("n", "<C-j>", "<C-w>j", opts)
+-- keymap("n", "<C-k>", "<C-w>k", opts)
+-- keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- Resize with arrows
 -- keymap("n", "<C-Up>", ":resize -4<CR>", opts)
@@ -44,24 +40,43 @@ keymap("n", "<C-l>", "<C-w>l", opts)
 -- keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 
 -- Vim-Slime
-keymap("n", "<Leader>cx","<Plug>SlimeParagraphSend", opts)
+keymap("n", "<Leader>cx", "<Plug>SlimeParagraphSend", opts)
 
 -- Vim-Easy-Align
 keymap("n", "ga", "<Plug>(EasyAlign)", opts)
 
 -- Telescope
-keymap("n", "<leader>f", "<cmd>Telescope find_files<CR>", opts)
+keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>", opts)
+keymap("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", opts)
+keymap("n", "<leader>fh", "<cmd>Telescope oldfiles<CR>", opts)
 -- keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<CR>", opts)
-keymap("n", "<c-t>", "<cmd>Telescope live_grep<CR>", opts)
 
+-- Hop
+-- remove 's' key functionality
+keymap("n", "s", "<Nop>", opts)
+keymap("n", "S", "<Nop>", opts)
 
-keymap("n", "<leader>bb", ":ls<CR>:b<space>",opts)
-keymap("n", "<leader>bd", ":bd<CR>",opts)
+keymap("n", "sw", "<cmd>HopWord<CR>", opts)
+keymap("n", "sl", "<cmd>HopLineStart<CR>", opts)
+keymap("n", "sc", "<cmd>HopChar1<CR>", opts)
+keymap("n", "ss", "<cmd>HopChar2<CR>", opts)
+keymap("n", "sp", "<cmd>HopPattern<CR>", opts)
+
+-- Buffer Control
+keymap("n", "<leader>bb", ":ls<CR>:b<space>", opts)
+keymap("n", "<leader>bd", ":bd<CR>", opts)
+
+-- Remove Whitespace
+vim.cmd([[
+nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+]])
+
+keymap("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/user/luasnip.lua<CR>")
 
 -------------------------
 --       INSERT        --
 -------------------------
--- Press jk fast to exit insert mode 
+-- Press jk fast to exit insert mode
 -- keymap("i", "jk", "<ESC>", opts)
 
 
@@ -93,14 +108,14 @@ keymap("x", "<Leader>cx", "<Plug>SlimeRegionSend", opts)
 
 -- Vim-Easy-Align
 keymap("x", "ga", "<Plug>(EasyAlign)", opts)
- 
 
 -------------------------
 --      TERMINAL       --
 -------------------------
+-- local term_opts = { silent = true }
+--
 -- Better terminal navigation
 -- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 -- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
-
