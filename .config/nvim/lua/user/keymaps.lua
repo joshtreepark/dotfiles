@@ -49,6 +49,7 @@ keymap("n", "ga", "<Plug>(EasyAlign)", opts)
 keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>", opts)
 keymap("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", opts)
 keymap("n", "<leader>fh", "<cmd>Telescope oldfiles<CR>", opts)
+keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>", opts)
 -- keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<CR>", opts)
 
 -- Hop

@@ -200,6 +200,11 @@ _G.packer_plugins = {
     path = "/Users/joshpark/.local/share/nvim/site/pack/packer/start/vim-easy-align",
     url = "https://github.com/junegunn/vim-easy-align"
   },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/Users/joshpark/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
+  },
   ["vim-slime"] = {
     loaded = true,
     path = "/Users/joshpark/.local/share/nvim/site/pack/packer/start/vim-slime",

@@ -27,25 +27,29 @@ local snippets = {
     {}
   \end{{{}}}
   ]], { i(1), i(0), rep(1) })),
-	s("thm", { t { "\\begin{theorem}", "\t" }, i(1), t { "", "\\end{theorem}", "" }, i(0) }),
-	s("cor", { t { "\\begin{corollary}", "\t" }, i(1), t { "", "\\end{corollary}", "" }, i(0) }),
-	s("proof", { t { "\\begin{proof}", "\t" }, i(1), t { "", "\\end{proof}", "" }, i(0) }),
-	s("def", { t  "\\begin{definition}[", i(1), t {"]", "\t" }, i(2), t { "", "\\end{definition}", "" }, i(0) }),
+	s("thm", { t { "\\begin{theorem}", "\t" }, i(0), t { "", "\\end{theorem}", "" } }),
+	s("cor", { t { "\\begin{corollary}", "\t" }, i(0), t { "", "\\end{corollary}", "" } }),
+	s("proof", { t { "\\begin{proof}", "\t" }, i(0), t { "", "\\end{proof}", "" } }),
+	s("def", { t  "\\begin{definition}[", i(1), t {"]", "\t" }, i(0), t { "", "\\end{definition}", "" } }),
 	s("rm", { t "\\textrm{", i(1), t "}", i(0) }),
 	s("bf", { t "\\textbf{", i(1), t "}", i(0) }),
 	s("bb", { t "\\mathbb{", i(1), t "}", i(0) }, in_math),
+	s("mcal", { t "\\mathcal{", i(1), t "}", i(0) }, in_math),
 	s("lr", { t "\\left(", i(1), t "\\right)", i(0) }),
 	s("lr(", { t "\\left(", i(1), t "\\right)", i(0) }),
 	s("lr{", { t "\\left\\{", i(1), t "\\right\\}", i(0) }),
 	s("lr|", { t "\\left|", i(1), t "\\right|", i(0) }),
 	s("lrfl", { t "\\left\\lfloor ", i(1), t " \\right\\rfloor", i(0) }, { condition = is_math }),
 	s("lim", { t "\\lim_{", i(1, "n \\to \\infty"), t "} ", i(0) }, { condition = is_math }),
-	s("limsup", { t "\\limsup_{", i(1, "n \\ to \\infty"), t "} ", i(0) }, { condition = is_math }),
+	s("limsup", { t "\\limsup_{", i(1, "n \\to \\infty"), t "} ", i(0) }, { condition = is_math }),
+	s("liminf", { t "\\liminf_{", i(1, "n \\to \\infty"), t "} ", i(0) }, { condition = is_math }),
+	s("uuu", { t "\\bigcup_{", i(1, "n = 1"), t "}^{", i(2, "\\infty"), t "} ", i(0) }, { condition = is_math }),
+	s("nnn", { t "\\bigcap_{", i(1, "n = 1"), t "}^{", i(2, "\\infty"), t "} ", i(0) }, { condition = is_math }),
 }
 
 local autosnippets = {
 	s("mk", { t "$", i(1), t "$", i(0) }),
-	s("dm", { t { "\\[", "\t" }, i(1), t { ".", "\\]" }, i(0) }, { condition = not_math }),
+	s("dm", { t { "\\[", "\t" }, i(0), t { ".", "\\]" } }, { condition = not_math }),
 	s("neq", { t("\\neq") }, { condition = is_math }),
 	s("ooo", { t "\\infty" }, { condition = is_math }),
 	s("...", { t "\\ldots" }, { condition = is_math }),
@@ -55,6 +59,12 @@ local autosnippets = {
 	s("func", { i(1, "f"), t " : ", i(2, "\\R"), t " \\to ", i(3, "\\R") }, { condition = is_math }),
 	s("bar", { t("\\overline{"), i(1), t "}", i(0) }, { condition = is_math }),
 	s("hat", { t("\\hat{"), i(1), t "}", i(0) }, { condition = is_math }),
+	s({ trig = "compl", wordTrig = false}, { t("^{c}") }, { condition = is_math }),
+	s({ trig = "inv", wordTrig = false }, { t "^{-1}", i(0) }, { condition = is_math }),
+	s({ trig = "__", wordTrig = false }, { t "_{", i(1), t "}", i(0) }, { condition = is_math }),
+	s({ trig = "^^", wordTrig = false }, { t "^{", i(1), t "}", i(0) }, { condition = is_math }),
+	-- s({ trig = ">>", wordTrig = false }, { t "\\gg  ", i(0) }, { condition = is_math }),
+	-- s({ trig = "<<", wordTrig = false }, { t "\\ll  ", i(0) }, { condition = is_math }),
 }
 
 return snippets, autosnippets
