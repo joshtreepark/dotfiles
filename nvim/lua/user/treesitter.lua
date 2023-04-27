@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 configs.setup {
-  ensure_installed = {"c", "cpp", "json", "lua", "python"},
+  ensure_installed = {"c", "json", "lua", "python"},
   sync_install = false,
   ignore_install = { "" }, -- List of parsers to ignore installing
   highlight = {

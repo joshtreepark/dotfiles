@@ -32,6 +32,10 @@ setopt HIST_VERIFY               # Do not execute immediately upon history expan
 # +---------+
 
 source $DOTFILES/aliases/aliases
+# Source local alias file if exists
+if [ -f $ZDOTDIR/local_aliases ] ; then
+	source $ZDOTDIR/local_aliases
+fi
 
 # +--------+
 # | PROMPT |
@@ -40,13 +44,16 @@ PROMPT="%F{cyan}%n %1~ %# %f"
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
-###          PATH          ###
-# Note: zsh specific
-path+=('$HOME/bin')                   # zsh
-path+=('/usr/bin')                   
-path+=('/usr/local/bin')  	          # screen
-path+=('$HOME/.emacs.d/bin')          # emacs
-path+=('/Applications/Stata/StataMP.app/Contents/MacOS/')  # Stata
+# +--------+
+# |  PATH  |
+# +--------+
+# Note: zsh specific syntax
+path+=('$HOME/bin')
+path+=('$HOME/.local/bin')
+path+=('/usr/bin')
+path+=('/usr/local/bin')
+# path+=('$HOME/.emacs.d/bin')    # emacs
+# path+=('/Applications/Stata/StataMP.app/Contents/MacOS/')  # Stata
 export PATH
 
 # For fzf functionality
@@ -56,6 +63,7 @@ export PATH
 autoload -Uz compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' # ignore case when tab complete
 
+# MacOS iTerm Integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # +-----------+
@@ -67,15 +75,15 @@ source $DOTFILES/zsh/plugins/cursor_mode.zsh
 
 #
 # VPN Functionality
-# 
+#
 # function vpn-up() {
 #   local VPN_HOST={vpn.nber.org}
 #   local VPN_USER={joshpark}
-# 
+#
 #   echo "Starting the vpn ..."
 #   sudo openconnect --protocol=fortinet --background --user=$VPN_USER $VPN_HOST
 # }
-# 
+#
 # function vpn-down() {
 #   sudo kill -2 `pgrep openconnect`
 # }
