@@ -61,7 +61,9 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # +-----------+
 # | FUNCTIONS |
 # +-----------+
-source $ZDOTDIR/bd.zsh
+source $DOTFILES/zsh/plugins/bd.zsh
+source $DOTFILES/zsh/plugins/cursor_mode.zsh
+
 
 #
 # VPN Functionality
