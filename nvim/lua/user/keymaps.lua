@@ -41,6 +41,7 @@ vim.g.maplocalleader = " "
 
 -- Vim-Slime
 keymap("n", "<Leader>cx", "<Plug>SlimeParagraphSend", opts)
+keymap("n", "<Leader>cl", "<cmd>SlimeSendCurrentLine<CR>", opts)
 
 -- Vim-Easy-Align
 keymap("n", "ga", "<Plug>(EasyAlign)", opts)
@@ -92,6 +93,8 @@ keymap("v", ">", ">gv", opts)
 keymap("v", "<A-j>", ":m .+1<CR>==", opts)
 keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 keymap("v", "p", '"_dP', opts)
+
+-- vim-slime
 keymap("v", "<Leader>cx", "<Plug>SlimeRegionSend", opts)
 
 

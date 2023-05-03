@@ -1,6 +1,15 @@
 # +------------+
 # | NAVIGATION |
 # +------------+
+# Vi Keybindings
+bindkey -v
+export KEYTIMEOUT=1
+
+# Use vim to edit commands
+# Press `v` in "Normal" mode
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
 
 setopt AUTO_CD              # Go to folder path without using cd.
 
@@ -56,6 +65,12 @@ path+=('/usr/local/bin')
 # path+=('/Applications/Stata/StataMP.app/Contents/MacOS/')  # Stata
 export PATH
 
+# +-----------+
+# | FUNCTIONS |
+# +-----------+
+source $DOTFILES/zsh/plugins/bd.zsh
+source $DOTFILES/zsh/plugins/cursor_mode.zsh
+
 # For fzf functionality
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -65,13 +80,6 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' # ignore case when tab co
 
 # MacOS iTerm Integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-# +-----------+
-# | FUNCTIONS |
-# +-----------+
-source $DOTFILES/zsh/plugins/bd.zsh
-source $DOTFILES/zsh/plugins/cursor_mode.zsh
-
 
 #
 # VPN Functionality

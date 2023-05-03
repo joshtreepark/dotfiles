@@ -41,25 +41,25 @@ local lsp_flags = {
 --   on_attach = on_attach,
 --   flags = lsp_flags,
 -- }
-require('lspconfig')['sumneko_lua'].setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { "vim" },
-      },
-      workspace = {
-        library = {
-          [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-          [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-        },
-        maxPreload = 100000,
-        preloadFileSize = 10000,
-      },
-    },
-  },
-}
+-- require('lspconfig')['sumneko_lua'].setup {
+--   on_attach = on_attach,
+--   flags = lsp_flags,
+--   settings = {
+--     Lua = {
+--       diagnostics = {
+--         globals = { "vim" },
+--       },
+--       workspace = {
+--         library = {
+--           [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+--           [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+--         },
+--         maxPreload = 100000,
+--         preloadFileSize = 10000,
+--       },
+--     },
+--   },
+-- }
 -- require('lspconfig')['tsserver'].setup{
 --     on_attach = on_attach,
 --     flags = lsp_flags,
