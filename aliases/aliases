@@ -11,9 +11,9 @@
 # +----+
 
 alias ls='ls --color=auto'
-alias l='ls -l'
-alias ll='ls -lh'
-alias la='ls -lhA'
+alias l='ls -lv'
+alias ll='ls -lhv'
+alias la='ls -lhAv'
 # alias lls='ls -lahFtr'
 
 # +-----+
