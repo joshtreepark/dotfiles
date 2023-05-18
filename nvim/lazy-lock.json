@@ -1,6 +1,11 @@
 {
+  "alpha-nvim": { "branch": "main", "commit": "1838ae926e8d49fe5330d1498ee8289ae2c340bc" },
+  "gitsigns.nvim": { "branch": "main", "commit": "814158f6c4b1724c039fcefe79b0be72c9131c2d" },
+  "indent-blankline.nvim": { "branch": "master", "commit": "018bd04d80c9a73d399c1061fa0c3b14a7614399" },
   "lazy.nvim": { "branch": "main", "commit": "6d4135d83d00f83a797dfe0f93a8d3fce08e6a2f" },
   "lualine.nvim": { "branch": "master", "commit": "05d78e9fd0cdfb4545974a5aa14b1be95a86e9c9" },
   "nvim-web-devicons": { "branch": "master", "commit": "986875b7364095d6535e28bd4aac3a9357e91bbe" },
+  "plenary.nvim": { "branch": "master", "commit": "9ac3e9541bbabd9d73663d757e4fe48a675bb054" },
+  "telescope.nvim": { "branch": "master", "commit": "c1a2af0af69e80e14e6b226d3957a064cd080805" },
   "tokyonight.nvim": { "branch": "main", "commit": "df13e3268a44f142999fa166572fe95a650a0b37" }
 }

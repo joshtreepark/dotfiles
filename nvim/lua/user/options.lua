@@ -49,4 +49,4 @@ vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]              -- this sets words with hypens as one word
 -- vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
 
-vim.g.python3_host_prog = "/usr/local/bin/python3"
+-- vim.g.python3_host_prog = "/usr/local/bin/python3"

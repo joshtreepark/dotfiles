@@ -1,4 +1,4 @@
--- options.lua
+-- config/options.lua
 -- 
 -- set basic options in vim
 
@@ -26,8 +26,8 @@ local options = {
   updatetime = 800,                        -- faster completion (4000ms default)
   writebackup = false,                     -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
   expandtab = true,                        -- convert tabs to spaces
-  shiftwidth = 4,                          -- the number of spaces inserted for each indentation
-  tabstop = 4,                             -- insert # of spaces for a tab
+  shiftwidth = 2,                          -- the number of spaces inserted for each indentation
+  tabstop = 2,                             -- insert # of spaces for a tab
   cursorline = true,                       -- highlight the current line
   number = true,                           -- set numbered lines
   relativenumber = false,                  -- set relative numbered lines
