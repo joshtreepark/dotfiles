@@ -1,5 +1,8 @@
 return {
+  {
     "folke/tokyonight.nvim",
+    lazy = false, -- make sure to load during startup
+    priority = 1000, -- make sure to load before all other plugins
     opts = {
         -- your configuration comes here
         -- or leave it empty to use the default settings
@@ -33,5 +36,10 @@ return {
         --@param highlights Highlights
         --@param colors ColorScheme
         -- on_highlights = function(highlights, colors) end,
-    }
+     },
+     config = function()
+         -- load colorscheme here
+         vim.cmd([[colorscheme tokyonight]])
+     end,
+  }
 }
