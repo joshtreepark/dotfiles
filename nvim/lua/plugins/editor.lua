@@ -1,14 +1,20 @@
 return {
+  -- Telescope: A Fuzzy Finder for Neovim
   {
     'nvim-telescope/telescope.nvim', 
     tag = '0.1.1',
     cmd = "Telescope",
     dependencies = { 'nvim-lua/plenary.nvim' },
-    opt = {
+    opts = {
+      defaults = {
+        prompt_prefix = " ",
+        selection_caret = " ",
+        path_display = { "smart" },
+      },
     },
   },
 
-  -- shows git changes on the side
+  -- Gitsigns: shows git file changes on the side
   {
     'lewis6991/gitsigns.nvim',
     event = { "BufReadPre", "BufNewFile" },
