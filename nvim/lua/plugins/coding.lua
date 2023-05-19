@@ -1,6 +1,6 @@
 return {
   -- send code to another session, REPL functionality
-  -- TODO: set lazy loading if possible
+  -- TODO: set lazy loading for commands
   {
   "jpalardy/vim-slime",
   event = { "BufReadPost", "BufNewFile" },
@@ -17,6 +17,5 @@ return {
   {
     "tpope/vim-commentary",
     event = { "BufReadPost", "BufNewFile" },
-  }
+  },
 }
-
