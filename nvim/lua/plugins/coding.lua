@@ -3,6 +3,7 @@ return {
   -- TODO: set lazy loading if possible
   {
   "jpalardy/vim-slime",
+  event = { "BufReadPost", "BufNewFile" },
   config = function()
     vim.cmd [[
     let g:slime_target = "tmux"
@@ -15,7 +16,7 @@ return {
 
   {
     "tpope/vim-commentary",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile" },
   }
 }
 
