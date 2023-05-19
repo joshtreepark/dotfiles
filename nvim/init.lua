@@ -5,13 +5,9 @@ require('config.options')
 require('config.keymaps')
 vim.cmd([[colorscheme tokyonight]])
 
--- vim.cmd([[
--- augroup numbertoggle
---   autocmd!
---   autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
---   autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
--- augroup END
--- ]])
+
+vim.cmd([[autocmd FileType apache setlocal commentstring=*\ %s]])
+
 --
 -- -- For WSL Clipboard functionality
 -- vim.cmd([[

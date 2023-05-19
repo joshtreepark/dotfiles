@@ -1,0 +1,21 @@
+return {
+  -- send code to another session, REPL functionality
+  -- TODO: set lazy loading if possible
+  {
+  "jpalardy/vim-slime",
+  config = function()
+    vim.cmd [[
+    let g:slime_target = "tmux"
+    let g:slime_paste_file = expand("$HOME/.cache/nvim/slime_paste")
+    let g:slime_no_mappings = 1
+    let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
+    ]]
+  end,
+  },
+
+  {
+    "tpope/vim-commentary",
+    event = { "BufReadPre", "BufNewFile" },
+  }
+}
+

@@ -67,7 +67,7 @@ return {
     opts = {
       -- char = "▏",
       char = "│",
-      filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
+      filetype_exclude = { "help", "alpha", "dashboard", "lazy", "mason" },
       show_trailing_blankline_indent = false,
       show_current_context = false,
       show_first_indent_level = false,
