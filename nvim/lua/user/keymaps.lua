@@ -40,11 +40,11 @@ vim.g.maplocalleader = " "
 -- keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 
 -- Vim-Slime
-keymap("n", "<Leader>cx", "<Plug>SlimeParagraphSend", opts)
-keymap("n", "<Leader>cl", "<cmd>SlimeSendCurrentLine<CR>", opts)
+-- keymap("n", "<Leader>cx", "<Plug>SlimeParagraphSend", opts)
+-- keymap("n", "<Leader>cl", "<cmd>SlimeSendCurrentLine<CR>", opts)
 
 -- Vim-Easy-Align
-keymap("n", "ga", "<Plug>(EasyAlign)", opts)
+-- keymap("n", "ga", "<Plug>(EasyAlign)", opts)
 
 -- Telescope
 keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>", opts)
@@ -55,8 +55,8 @@ keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>", opts)
 
 -- Hop
 -- remove 's' key functionality
-keymap("n", "s", "<cmd>HopWord<CR>", opts)
-keymap("n", "S", "<cmd>HopChar2<CR>", opts)
+-- keymap("n", "s", "<cmd>HopWord<CR>", opts)
+-- keymap("n", "S", "<cmd>HopChar2<CR>", opts)
 
 -- keymap("n", "sw", "<cmd>HopWord<CR>", opts)
 -- keymap("n", "sl", "<cmd>HopLineStart<CR>", opts)
@@ -95,7 +95,7 @@ keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 keymap("v", "p", '"_dP', opts)
 
 -- vim-slime
-keymap("v", "<Leader>cx", "<Plug>SlimeRegionSend", opts)
+-- keymap("v", "<Leader>cx", "<Plug>SlimeRegionSend", opts)
 
 
 -------------------------
@@ -108,10 +108,10 @@ keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- Vim-Slime
-keymap("x", "<Leader>cx", "<Plug>SlimeRegionSend", opts)
+-- keymap("x", "<Leader>cx", "<Plug>SlimeRegionSend", opts)
 
 -- Vim-Easy-Align
-keymap("x", "ga", "<Plug>(EasyAlign)", opts)
+-- keymap("x", "ga", "<Plug>(EasyAlign)", opts)
 
 -------------------------
 --      TERMINAL       --
