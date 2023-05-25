@@ -1,7 +1,7 @@
 return {
   -- Telescope: A Fuzzy Finder for Neovim
   {
-    'nvim-telescope/telescope.nvim', 
+    'nvim-telescope/telescope.nvim',
     tag = '0.1.1',
     cmd = "Telescope",
     dependencies = { 'nvim-lua/plenary.nvim' },
@@ -60,5 +60,5 @@ return {
         enable = false
       },
     },
-  }, 
+  },
 }

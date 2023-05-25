@@ -5,9 +5,6 @@ require('config.options')
 require('config.keymaps')
 vim.cmd([[colorscheme tokyonight]])
 
-
-vim.cmd([[autocmd FileType apache setlocal commentstring=*\ %s]])
-
 --
 -- -- For WSL Clipboard functionality
 -- vim.cmd([[

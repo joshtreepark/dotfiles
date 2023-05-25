@@ -2,7 +2,6 @@
 
 return {
   -- send code to another session, REPL functionality
-  -- TODO: set lazy loading for commands
   {
   "jpalardy/vim-slime",
   keys = {
@@ -21,14 +20,16 @@ return {
   },
 
   -- A tpope vim commenter (Press gc)
-  -- Chose this since it's a lot lighter, and I don't need advanced comments
+  -- Chose this over Comment.nvim since it's a lot lighter, and I don't need
+  -- advanced comments and is faster
   {
     "tpope/vim-commentary",
     event = { "BufReadPost", "BufNewFile" },
   },
 
   -- Stata Syntax Highlighting
-  -- has other things such as snippets as well, but I'm not using them currently...
+  -- has other things such as snippets as well, but I'm not using them
+  -- currently...
   {
     "poliquin/stata-vim",
     ft = { "stata" },
