@@ -18,4 +18,8 @@ return {
     "tpope/vim-commentary",
     event = { "BufReadPost", "BufNewFile" },
   },
+  {
+    "poliquin/stata-vim",
+    ft = { "stata" },
+  },
 }
