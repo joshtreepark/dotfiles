@@ -5,9 +5,9 @@ return {
   {
   "jpalardy/vim-slime",
   keys = {
-    { "<Leader>cx", "<Plug>SlimeRegionSend", mode = {"x", "v"} },
-    { "<Leader>cx", "<Plug>SlimeParagraphSend" },
-    { "<Leader>cl", "<cmd>SlimeSendCurrentLine<CR>" },
+    { "<Leader>sr", "<Plug>SlimeRegionSend", mode = {"x", "v"} },
+    { "<Leader>sr", "<Plug>SlimeParagraphSend" },
+    { "<Leader>sl", "<cmd>SlimeSendCurrentLine<CR>" },
   },
   config = function()
     vim.cmd [[

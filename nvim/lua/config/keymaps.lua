@@ -52,8 +52,9 @@ keymap("n", "<leader>bd", ":bd<CR>", opts)
 
 -- Remove Whitespace
 vim.cmd([[
-nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+nnoremap <silent> <leader>ew :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 ]])
+keymap("n", "<leader>ei", "<cmd>IndentBlanklineToggle<CR>", opts)
 
 -- keymap("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/user/luasnip.lua<CR>")
 
