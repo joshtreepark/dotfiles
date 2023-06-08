@@ -21,3 +21,6 @@ export VISUAL="nvim"
 export HISTFILE="$XDG_STATE_HOME/zsh/zsh_history" # History filepath
 export HISTSIZE=10000                             # Maximum events for internal history
 export SAVEHIST=10000                             # Maximum events in history file
+
+# Python
+export PYTHONSTARTUP="$HOME/.config/python/pythonstartup"
