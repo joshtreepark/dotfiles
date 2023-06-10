@@ -30,6 +30,11 @@ if [ ! -d "$XDG_STATE_HOME/zsh" ]; then
     mkdir "$XDG_STATE_HOME/zsh"
 fi
 
+# history options
+export HISTFILE="$XDG_STATE_HOME/zsh/zsh_history" # History filepath
+export HISTSIZE=10000                             # Maximum events for internal history
+export SAVEHIST=10000                             # Maximum events in history file
+
 setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
 setopt SHARE_HISTORY             # Share history between all sessions.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
@@ -39,13 +44,17 @@ setopt HIST_FIND_NO_DUPS         # Do not display a previously found event.
 setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
 setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
 setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
+
+# zsh does not use HISTTIMEFORMAT
 # export HISTTIMEFORMAT="[%F %T] "
 
+#
 # +---------+
 # | ALIASES |
 # +---------+
 
 source $DOTFILES/aliases/aliases
+
 # Source local alias file if exists
 if [ -f $ZDOTDIR/local_aliases ] ; then
 	source $ZDOTDIR/local_aliases
