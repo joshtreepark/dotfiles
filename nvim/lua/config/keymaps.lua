@@ -26,10 +26,10 @@ vim.g.maplocalleader = " "
 -- keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- Resize with arrows
--- keymap("n", "<C-Up>", ":resize -4<CR>", opts)
--- keymap("n", "<C-Down>", ":resize +2<CR>", opts)
--- keymap("n", "<C-Left>", ":vertical resize -3<CR>", opts)
--- keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+keymap("n", "<C-Up>", ":resize -4<CR>", opts)
+keymap("n", "<C-Down>", ":resize +2<CR>", opts)
+keymap("n", "<C-Left>", ":vertical resize -3<CR>", opts)
+keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
 -- keymap("n", "<S-l>", ":bnext<CR>", opts)
@@ -39,13 +39,6 @@ vim.g.maplocalleader = " "
 -- keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
 -- keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 
--- Vim-Slime
-keymap("n", "<Leader>cx", "<Plug>SlimeParagraphSend", opts)
-keymap("n", "<Leader>cl", "<cmd>SlimeSendCurrentLine<CR>", opts)
-
--- Vim-Easy-Align
-keymap("n", "ga", "<Plug>(EasyAlign)", opts)
-
 -- Telescope
 keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>", opts)
 keymap("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", opts)
@@ -53,27 +46,18 @@ keymap("n", "<leader>fh", "<cmd>Telescope oldfiles<CR>", opts)
 keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>", opts)
 -- keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<CR>", opts)
 
--- Hop
--- remove 's' key functionality
-keymap("n", "s", "<cmd>HopWord<CR>", opts)
-keymap("n", "S", "<cmd>HopChar2<CR>", opts)
-
--- keymap("n", "sw", "<cmd>HopWord<CR>", opts)
--- keymap("n", "sl", "<cmd>HopLineStart<CR>", opts)
--- keymap("n", "sc", "<cmd>HopChar1<CR>", opts)
--- keymap("n", "ss", "<cmd>HopChar2<CR>", opts)
--- keymap("n", "sp", "<cmd>HopPattern<CR>", opts)
-
 -- Buffer Control
 keymap("n", "<leader>bb", ":ls<CR>:b<space>", opts)
 keymap("n", "<leader>bd", ":bd<CR>", opts)
 
 -- Remove Whitespace
 vim.cmd([[
-nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+nnoremap <silent> <leader>ew :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 ]])
+keymap("n", "<leader>ei", "<cmd>IndentBlanklineToggle<CR>", opts)
 
-keymap("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/user/luasnip.lua<CR>")
+-- keymap("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/user/luasnip.lua<CR>")
+
 
 -------------------------
 --       INSERT        --
@@ -94,9 +78,6 @@ keymap("v", "<A-j>", ":m .+1<CR>==", opts)
 keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 keymap("v", "p", '"_dP', opts)
 
--- vim-slime
-keymap("v", "<Leader>cx", "<Plug>SlimeRegionSend", opts)
-
 
 -------------------------
 --    VISUAL BLOCK     --
@@ -107,11 +88,6 @@ keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
--- Vim-Slime
-keymap("x", "<Leader>cx", "<Plug>SlimeRegionSend", opts)
-
--- Vim-Easy-Align
-keymap("x", "ga", "<Plug>(EasyAlign)", opts)
 
 -------------------------
 --      TERMINAL       --
