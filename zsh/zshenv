@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 
-################################
-# EXPORT ENVIRONMENT VARIABLES #
-################################
+#########################
+# ENVIRONMENT VARIABLES #
+#########################
 
 # XDG
 export XDG_CONFIG_HOME="$HOME/.config"
