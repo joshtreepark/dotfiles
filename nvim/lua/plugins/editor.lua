@@ -68,6 +68,10 @@ return {
     opts = {
         window = {
             backdrop = 1, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
+            options = {
+                wrap      = true,
+                linebreak = true,
+            },
         },
         plugins = {
             gitsigns = { enabled = false }, -- disables git signs
