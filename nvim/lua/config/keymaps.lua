@@ -49,6 +49,8 @@ keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>", opts)
 -- Buffer Control
 keymap("n", "<leader>bb", ":ls<CR>:b<space>", opts)
 keymap("n", "<leader>bd", ":bd<CR>", opts)
+keymap("n", "<leader>h", ":bp<CR>", opts)
+keymap("n", "<leader>l", ":bn<CR>", opts)
 
 -- Remove Whitespace
 vim.cmd([[
