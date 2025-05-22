@@ -16,4 +16,4 @@ export DOTFILES="$HOME/.dots"
 export VISUAL="nvim"
 
 # Python
-export PYTHONSTARTUP="$HOME/.config/python/pythonstartup"
+# export PYTHONSTARTUP="$HOME/.config/python/pythonstartup"

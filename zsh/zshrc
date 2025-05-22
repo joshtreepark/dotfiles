@@ -75,6 +75,9 @@ path+=('$HOME/bin')
 path+=('$HOME/.local/bin')
 path+=('/usr/bin')
 path+=('/usr/local/bin')
+path+=('/usr/local/sbin')
+# ruby installation (homebrew) -- prepend
+path=('/usr/local/opt/ruby/bin' $path) 
 # path+=('$HOME/.emacs.d/bin')    # emacs
 # path+=('/Applications/Stata/StataMP.app/Contents/MacOS/')  # Stata
 export PATH
