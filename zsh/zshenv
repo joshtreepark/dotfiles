@@ -13,7 +13,20 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export DOTFILES="$HOME/.dots"
 
 # editor
-export VISUAL="nvim"
+export VISUAL="vim"
 
 # Python
 # export PYTHONSTARTUP="$HOME/.config/python/pythonstartup"
+
+# Less
+# Create the less cache directory if it doesn't exist
+if [ ! -d "$XDG_CACHE_HOME/less" ]; then
+  mkdir -p "$XDG_CACHE_HOME/less"
+fi
+export LESSHISTFILE="$XDG_CACHE_HOME/less/lesshst"
+
+# R
+export R_PROFILE_USER="$XDG_CONFIG_HOME/R/Rprofile"
+export R_ENVIRON_USER="$XDG_CONFIG_HOME/R/Renviron"
+export R_HISTFILE="$XDG_CACHE_HOME/R/history"
+export R_LIBS_USER="$XDG_DATA_HOME/R/library"

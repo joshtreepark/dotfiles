@@ -12,26 +12,32 @@ zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
 setopt AUTO_CD              # Go to folder path without using cd.
-
 setopt AUTO_PUSHD           # Push the old directory onto the stack on cd.
 setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
 setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.
-
 setopt CORRECT              # Spelling correction
 setopt CDABLE_VARS          # Change directory to a path stored in a variable.
 setopt EXTENDED_GLOB        # Use extended globbing syntax.
+
+# Use XDG dirs for completion and history files
+[ -d "$XDG_STATE_HOME"/zsh ] || mkdir -p "$XDG_STATE_HOME"/zsh
+HISTFILE="$XDG_STATE_HOME"/zsh/history
+
+[ -d "$XDG_CACHE_HOME"/zsh ] || mkdir -p "$XDG_CACHE_HOME"/zsh
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' # ignore case when tab complete
+# compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION # may delete
+
+# Only run compinit if not already initialized
+autoload -Uz compinit
+if [[ -z "$_comp_dumpfile" ]]; then
+  compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION
+fi
 
 # +---------+
 # | HISTORY |
 # +---------+
 
-# make history folder
-if [ ! -d "$XDG_STATE_HOME/zsh" ]; then
-    mkdir "$XDG_STATE_HOME/zsh"
-fi
-
-# history options
-export HISTFILE="$XDG_STATE_HOME/zsh/zsh_history" # History filepath
 export HISTSIZE=10000                             # Maximum events for internal history
 export SAVEHIST=10000                             # Maximum events in history file
 
@@ -48,7 +54,6 @@ setopt HIST_VERIFY               # Do not execute immediately upon history expan
 # zsh does not use HISTTIMEFORMAT
 # export HISTTIMEFORMAT="[%F %T] "
 
-#
 # +---------+
 # | ALIASES |
 # +---------+
@@ -89,11 +94,11 @@ source $DOTFILES/zsh/plugins/bd.zsh
 source $DOTFILES/zsh/plugins/cursor_mode.zsh
 
 # For fzf functionality
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
 
-# Enable autocompletion
-autoload -Uz compinit && compinit
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' # ignore case when tab complete
+# Enable autocompletion (may delete)
+# autoload -Uz compinit && compinit
 
 # MacOS iTerm Integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
