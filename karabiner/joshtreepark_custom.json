@@ -1,8 +1,8 @@
 {
-  "title": "Josh's Caps-Lock Fix",
+  "title": "joshtreepark custom keybindings",
   "rules": [
     {
-      "description": "press right and left shift to enable capslock", 
+      "description": "Simultaneously press right and left shift to enable caps_lock (broken)", 
       "manipulators": [
         {
           "type": "basic",
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "description": "Toggle caps_lock by pressing left_shift then right-shift",
+      "description": "Toggle caps_lock by holding left_shift then pressing right_shift",
       "manipulators": [
         {
           "from": {
@@ -49,7 +49,7 @@
       ]
     },
     {
-      "description": "change capslock to esc/command",
+      "description": "Change caps_lock to esc/command",
       "manipulators": [
         {
           "type": "basic",
@@ -101,6 +101,43 @@
           ]
         }
       ]
+    },
+    {
+       "description": "fn+# will set input_source (change keyboard language)",
+       "manipulators": [
+           {
+               "from": {
+                   "key_code": "0",
+                   "modifiers": { "mandatory": ["fn"] }
+               },
+               "to": [{ "shell_command": "/usr/local/bin/macism com.apple.keylayout.USExtended 0" }],
+               "type": "basic"
+           },
+           {
+               "from": {
+                   "key_code": "9",
+                   "modifiers": { "mandatory": ["fn"] }
+               },
+               "to": [{ "shell_command": "/usr/local/bin/macism com.apple.inputmethod.Korean.2SetKorean 0" }],
+               "type": "basic"
+           },
+           {
+               "from": {
+                   "key_code": "8",
+                   "modifiers": { "mandatory": ["fn"] }
+               },
+               "to": [{ "shell_command": "/usr/local/bin/macism com.apple.inputmethod.SCIM.ITABC 0" }],
+               "type": "basic"
+           },
+           {
+               "from": {
+                   "key_code": "7",
+                   "modifiers": { "mandatory": ["fn"] }
+               },
+               "to": [{ "shell_command": "open -a 'Safari.app'" }],
+               "type": "basic"
+           }
+       ]
     }
   ]
 }
