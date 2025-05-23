@@ -17,16 +17,24 @@ export VISUAL="vim"
 
 # Python
 # export PYTHONSTARTUP="$HOME/.config/python/pythonstartup"
+# only for python3.13 onward
+[ -d "$XDG_STATE_HOME/python" ] || mkdir -p "$XDG_STATE_HOME/python"
+export PYTHON_HISTORY="$XDG_STATE_HOME/python/history"
+# export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME/python" # breaks Python behavior for homebrew
+# export PYTHONUSERBASE="$XDG_DATA_HOME/python"
 
 # Less
 # Create the less cache directory if it doesn't exist
-if [ ! -d "$XDG_CACHE_HOME/less" ]; then
-  mkdir -p "$XDG_CACHE_HOME/less"
+if [ ! -d "$XDG_STATE_HOME/less" ]; then
+  mkdir -p "$XDG_STATE_HOME/less"
 fi
-export LESSHISTFILE="$XDG_CACHE_HOME/less/lesshst"
+export LESSHISTFILE="$XDG_STATE_HOME/less/history"
 
 # R
+if [ ! -d "$XDG_STATE_HOME/R" ]; then
+  mkdir -p "$XDG_STATE_HOME/R"
+fi
 export R_PROFILE_USER="$XDG_CONFIG_HOME/R/Rprofile"
 export R_ENVIRON_USER="$XDG_CONFIG_HOME/R/Renviron"
-export R_HISTFILE="$XDG_CACHE_HOME/R/history"
 export R_LIBS_USER="$XDG_DATA_HOME/R/library"
+export R_HISTFILE="$XDG_STATE_HOME/R/history"
