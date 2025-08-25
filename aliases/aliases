@@ -20,13 +20,13 @@ alias la='ls -lhAv'
 # | Git |
 # +-----+
 
-alias gs='git status'
+# alias gs='git status'
 # alias gss='git status -s'
-alias ga='git add'
-alias gp='git push'
-alias gb='git branch '
-alias gc='git commit'
-alias gd='git diff'
+# alias ga='git add'
+# alias gp='git push'
+# alias gb='git branch '
+# alias gc='git commit'
+# alias gd='git diff'
 
 # XDG Config
 alias wget=wget --hsts-file="$XDG_STATE_HOME/wget-hsts"
