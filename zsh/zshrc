@@ -44,7 +44,7 @@ export SAVEHIST=10000                             # Maximum events in history fi
 setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
 setopt SHARE_HISTORY             # Share history between all sessions.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
-setopt HIST_IGNORE_DUPS          # Do not record an event that was just recorded again.
+# setopt HIST_IGNORE_DUPS          # Do not record an event that was just recorded again.
 setopt HIST_IGNORE_ALL_DUPS      # Delete an old recorded event if a new event is a duplicate.
 setopt HIST_FIND_NO_DUPS         # Do not display a previously found event.
 setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
@@ -58,7 +58,12 @@ setopt HIST_VERIFY               # Do not execute immediately upon history expan
 # | ALIASES |
 # +---------+
 
-source $DOTFILES/aliases/aliases
+if [[ -n "$DOTFILES" && -d "$DOTFILES" ]]; then
+	source $DOTFILES/aliases/aliases
+else
+	# Print a warning to stderr
+	print -u2 "warning: \$DOTFILES not set or not a directory, skipping custom sources."
+fi
 
 # Source local alias file if exists
 if [ -f $ZDOTDIR/local_aliases ] ; then
@@ -117,3 +122,25 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # function vpn-down() {
 #   sudo kill -2 `pgrep openconnect`
 # }
+
+# cdf [path] → fuzzy cd under given path (defaults to current dir)
+cdf() {
+  local search_root="${1:-.}"
+  local dir
+  dir=$(fd --type d --hidden --follow --exclude .git . "$search_root" | fzf) && cd "$dir"
+}
+
+# Find a file and open it on macOS, correctly handling spaces.
+fo() {
+  # Use the first argument as a search path, or default to the current directory.
+  local search_path=${1:-.}
+  
+  # The find command is now wrapped in "$(...)" to pass the result as a single argument.
+  local file
+  file=$(fd --type f . "$search_path" | fzf)
+
+  # Only try to open the file if a selection was actually made (the 'file' variable is not empty).
+  if [[ -n "$file" ]]; then
+    open "$file"
+  fi
+}
