@@ -1,145 +1,133 @@
-# +------------+
-# | NAVIGATION |
-# +------------+
-# Vi Keybindings
-bindkey -v
-export KEYTIMEOUT=1
+#--------------------------------------
+# Navigation & Editing
+#--------------------------------------
 
-# Use vim to edit commands
-# Press `v` in "Normal" mode
+# Set Vi keybindings for command-line editing.
+bindkey -v
+export KEYTIMEOUT=1 # Reduces delay for escape key in terminal.
+
+# Use vim to edit long commands by pressing 'v' in normal mode.
 autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
-setopt AUTO_CD              # Go to folder path without using cd.
-setopt AUTO_PUSHD           # Push the old directory onto the stack on cd.
-setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
-setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.
-setopt CORRECT              # Spelling correction
-setopt CDABLE_VARS          # Change directory to a path stored in a variable.
-setopt EXTENDED_GLOB        # Use extended globbing syntax.
+# --- Directory and Globbing Options ---
+setopt AUTO_CD              # Go to a directory by typing its name.
+setopt AUTO_PUSHD           # Automatically push directories onto the stack.
+setopt PUSHD_IGNORE_DUPS    # Don't push duplicate directories to the stack.
+setopt PUSHD_SILENT         # Suppress printing the directory stack.
+setopt CDABLE_VARS          # Allow cd'ing into a variable representing a path.
+setopt EXTENDED_GLOB        # Enable more advanced globbing features.
+setopt CORRECT              # Enable spelling correction for commands.
 
-# Use XDG dirs for completion and history files
-[ -d "$XDG_STATE_HOME"/zsh ] || mkdir -p "$XDG_STATE_HOME"/zsh
-HISTFILE="$XDG_STATE_HOME"/zsh/history
+#--------------------------------------
+# Shell State & Caching (XDG)
+#--------------------------------------
+# Use XDG Base Directory paths for history and completion cache files.
 
-[ -d "$XDG_CACHE_HOME"/zsh ] || mkdir -p "$XDG_CACHE_HOME"/zsh
-zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' # ignore case when tab complete
-# compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION # may delete
+# Ensure the state directory for Zsh exists.
+[ -d "$XDG_STATE_HOME/zsh" ] || mkdir -p "$XDG_STATE_HOME/zsh"
+HISTFILE="$XDG_STATE_HOME/zsh/history"
 
-# Only run compinit if not already initialized
+# Ensure the cache directory for Zsh exists.
+[ -d "$XDG_CACHE_HOME/zsh" ] || mkdir -p "$XDG_CACHE_HOME/zsh"
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' # Case-insensitive tab completion.
+
+# Initialize the completion system only if it hasn't been already.
 autoload -Uz compinit
 if [[ -z "$_comp_dumpfile" ]]; then
-  compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION
+  compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 fi
 
-# +---------+
-# | HISTORY |
-# +---------+
+#--------------------------------------
+# History
+#--------------------------------------
 
-export HISTSIZE=10000                             # Maximum events for internal history
-export SAVEHIST=10000                             # Maximum events in history file
+export HISTSIZE=10000                             # Max events stored in current session.
+export SAVEHIST=10000                             # Max events saved to the history file.
 
-setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
-setopt SHARE_HISTORY             # Share history between all sessions.
-setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
-# setopt HIST_IGNORE_DUPS          # Do not record an event that was just recorded again.
-setopt HIST_IGNORE_ALL_DUPS      # Delete an old recorded event if a new event is a duplicate.
-setopt HIST_FIND_NO_DUPS         # Do not display a previously found event.
-setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
-setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
-setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
+setopt EXTENDED_HISTORY          # Save timestamp and duration for each command.
+setopt SHARE_HISTORY             # Share history across all open shells instantly.
+setopt HIST_EXPIRE_DUPS_FIRST    # When trimming history, remove duplicates first.
+setopt HIST_IGNORE_ALL_DUPS      # If a new command is a duplicate, remove the old one.
+setopt HIST_FIND_NO_DUPS         # When searching, don't show duplicate entries.
+setopt HIST_IGNORE_SPACE         # Don't save commands that start with a space.
+setopt HIST_SAVE_NO_DUPS         # Don't write duplicate events to the history file.
+setopt HIST_VERIFY               # Show a command before running it from history.
 
-# zsh does not use HISTTIMEFORMAT
-# export HISTTIMEFORMAT="[%F %T] "
+#--------------------------------------
+# Aliases
+#--------------------------------------
 
-# +---------+
-# | ALIASES |
-# +---------+
-
+# Source custom aliases from a centralized dotfiles location.
 if [[ -n "$DOTFILES" && -d "$DOTFILES" ]]; then
-	source $DOTFILES/aliases/aliases
+	source "$DOTFILES/aliases/aliases"
 else
-	# Print a warning to stderr
-	print -u2 "warning: \$DOTFILES not set or not a directory, skipping custom sources."
+	print -u2 "warning: \$DOTFILES not set or not a directory; skipping custom aliases."
 fi
 
-# Source local alias file if exists
-if [ -f $ZDOTDIR/local_aliases ] ; then
-	source $ZDOTDIR/local_aliases
+# Source a local aliases file for machine-specific overrides.
+if [[ -f "$ZDOTDIR/local_aliases" ]] ; then
+	source "$ZDOTDIR/local_aliases"
 fi
 
-# +--------+
-# | PROMPT |
-# +--------+
+#--------------------------------------
+# Prompt & Appearance
+#--------------------------------------
+
 PROMPT="%F{cyan}%n %1~ %# %f"
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
-# +--------+
-# |  PATH  |
-# +--------+
-# Note: zsh specific syntax
-path+=($HOME/bin)
-path+=($HOME/.local/bin)
-path+=(/usr/local/bin)
-path+=(/usr/local/sbin)
-path+=(/usr/bin)
-# ruby installation (homebrew) -- prepend
-path=(/usr/local/opt/ruby/bin $path) 
-# path+=('$HOME/.emacs.d/bin')    # emacs
-# path+=('/Applications/Stata/StataMP.app/Contents/MacOS/')  # Stata
+#--------------------------------------
+# PATH Configuration
+#--------------------------------------
+
+# Prepend user-specific bin directories to the PATH.
+path=(
+  /usr/local/opt/ruby/bin  # Homebrew Ruby (prepend)
+  "$HOME/.local/bin"
+  "$HOME/bin"
+  /usr/local/sbin
+  "$path[@]" # Include the existing system path.
+)
 export PATH
 
-# +-----------+
-# | FUNCTIONS |
-# +-----------+
-source $DOTFILES/zsh/plugins/bd.zsh
-source $DOTFILES/zsh/plugins/cursor_mode.zsh
+#--------------------------------------
+# Functions & Plugins
+#--------------------------------------
 
-# For fzf functionality
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# --- Source Plugins ---
+if [[ -n "$DOTFILES" && -d "$DOTFILES" ]]; then
+    source "$DOTFILES/zsh/plugins/bd.zsh"
+    source "$DOTFILES/zsh/plugins/cursor_mode.zsh"
+fi
+
+# Initialize fzf keybindings and completions.
 source <(fzf --zsh)
 
-# Enable autocompletion (may delete)
-# autoload -Uz compinit && compinit
-
-# MacOS iTerm Integration
+# Source iTerm2 shell integration if it exists.
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-#
-# VPN Functionality
-#
-# function vpn-up() {
-#   local VPN_HOST={vpn.nber.org}
-#   local VPN_USER={joshpark}
-#
-#   echo "Starting the vpn ..."
-#   sudo openconnect --protocol=fortinet --background --user=$VPN_USER $VPN_HOST
-# }
-#
-# function vpn-down() {
-#   sudo kill -2 `pgrep openconnect`
-# }
+# --- Custom Functions ---
 
-# cdf [path] → fuzzy cd under given path (defaults to current dir)
+# cdf [path] → Fuzzy find a directory and cd into it.
+# Defaults to searching from the current directory.
 cdf() {
   local search_root="${1:-.}"
   local dir
   dir=$(fd --type d --hidden --follow --exclude .git . "$search_root" | fzf) && cd "$dir"
 }
 
-# Find a file and open it on macOS, correctly handling spaces.
+# fo [path] → Fuzzy find a file and open it.
+# Defaults to searching from the current directory.
 fo() {
-  # Use the first argument as a search path, or default to the current directory.
-  local search_path=${1:-.}
-  
-  # The find command is now wrapped in "$(...)" to pass the result as a single argument.
+  local search_path="${1:-.}"
   local file
   file=$(fd --type f . "$search_path" | fzf)
 
-  # Only try to open the file if a selection was actually made (the 'file' variable is not empty).
+  # Open the file only if a selection was made.
   if [[ -n "$file" ]]; then
     open "$file"
   fi

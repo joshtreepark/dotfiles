@@ -1,41 +1,42 @@
-#########################
-# ENVIRONMENT VARIABLES #
-#########################
+#--------------------------------------
+# Core Environment & Paths
+#--------------------------------------
+# This file is for setting environment variables that should be
+# available to all shell sessions, including login and non-interactive shells.
 
-# XDG
+# --- XDG Base Directories ---
+# Standardizes paths for user-specific config, data, and cache files.
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-# folders
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-export DOTFILES="$HOME/.dots"
+# --- Shell & Editor Configuration ---
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"         # Sets the Zsh config directory.
+export DOTFILES="$HOME/.dots"                 # Defines the location of your dotfiles.
+export VISUAL="vim"                           # Sets the default text editor.
 
-# editor
-export VISUAL="vim"
+#--------------------------------------
+# Application-Specific Settings
+#--------------------------------------
 
-# Python
-# export PYTHONSTARTUP="$HOME/.config/python/pythonstartup"
-# only for python3.13 onward
+# --- Python ---
+# Use XDG-compliant paths for Python's history file.
 [ -d "$XDG_STATE_HOME/python" ] || mkdir -p "$XDG_STATE_HOME/python"
 export PYTHON_HISTORY="$XDG_STATE_HOME/python/history"
-# export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME/python" # breaks Python behavior for homebrew
+# export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME/python" # NOTE: Can break Homebrew Python.
 # export PYTHONUSERBASE="$XDG_DATA_HOME/python"
 
-# Less
-# Create the less cache directory if it doesn't exist
-if [ ! -d "$XDG_STATE_HOME/less" ]; then
-  mkdir -p "$XDG_STATE_HOME/less"
-fi
+# --- Less ---
+# Use an XDG path for the 'less' command's history file.
+[ -d "$XDG_STATE_HOME/less" ] || mkdir -p "$XDG_STATE_HOME/less"
 export LESSHISTFILE="$XDG_STATE_HOME/less/history"
 
-# R
-if [ ! -d "$XDG_STATE_HOME/R" ]; then
-  mkdir -p "$XDG_STATE_HOME/R"
-fi
-export R_PROFILE_USER="$XDG_CONFIG_HOME/R/Rprofile"
-export R_ENVIRON_USER="$XDG_CONFIG_HOME/R/Renviron"
-export R_LIBS_USER="$XDG_DATA_HOME/R/library"
-export R_HISTFILE="$XDG_STATE_HOME/R/history"
-export R_MAKEVARS_USER="$XDG_CONFIG_HOME/R/Makevars"
+# --- R Language ---
+# Configure R to use XDG-compliant directories for its various files.
+[ -d "$XDG_STATE_HOME/R" ] || mkdir -p "$XDG_STATE_HOME/R"
+export R_PROFILE_USER="$XDG_CONFIG_HOME/R/Rprofile"   # R profile script path.
+export R_ENVIRON_USER="$XDG_CONFIG_HOME/R/Renviron"   # R environment variables.
+export R_LIBS_USER="$XDG_DATA_HOME/R/library"         # User library path for packages.
+export R_HISTFILE="$XDG_STATE_HOME/R/history"         # R command history file.
+export R_MAKEVARS_USER="$XDG_CONFIG_HOME/R/Makevars"  # User-specific Makefile variables.
