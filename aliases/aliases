@@ -1,32 +1,34 @@
-#!/usr/bin/env bash
+#--------------------------------------
+# System & General Utilities
+#--------------------------------------
+# This alias assumes $XDG_STATE_HOME is set in your environment (e.g., in .zshenv).
+alias wget='wget --hsts-file="$XDG_STATE_HOME/wget-hsts"' # Use XDG path for wget's HSTS file.
 
-# +--------+
-# | System |
-# +--------+
+# --- System Control (Example) ---
+# alias shutdown='sudo shutdown now'                     # Immediately shut down the system.
 
-# alias shutdown='sudo shutdown now'
 
-# +----+
-# | ls |
-# +----+
+#--------------------------------------
+# File & Directory Listing (ls)
+#--------------------------------------
+# NOTE: The '--color=auto' flag is for GNU `ls`. On BSD/macOS, the equivalent is '-G'.
 
-alias ls='ls --color=auto'
-alias l='ls -lv'
-alias ll='ls -lhv'
-alias la='ls -lhAv'
-# alias lls='ls -lahFtr'
+alias ls='ls --color=auto'    # Add color to ls output.
+alias l='ls -lv'              # List in long format with details.
+alias ll='ls -lhv'            # Long format with human-readable file sizes.
+alias la='ls -lhAv'           # List all files, including hidden ones.
+# alias lls='ls -lahFtr'      # List all, sorted by reverse modification time.
 
-# +-----+
-# | Git |
-# +-----+
 
-# alias gs='git status'
-# alias gss='git status -s'
-# alias ga='git add'
-# alias gp='git push'
-# alias gb='git branch '
-# alias gc='git commit'
-# alias gd='git diff'
+#--------------------------------------
+# Git Version Control
+#--------------------------------------
+# These are commented out but organized for easy enabling.
 
-# XDG Config
-alias wget=wget --hsts-file="$XDG_STATE_HOME/wget-hsts"
+# alias gs='git status'        # Show the working tree status.
+# alias gss='git status -s'     # Short-format status.
+# alias ga='git add'           # Add file contents to the index.
+# alias gp='git push'          # Push commits to a remote.
+# alias gb='git branch'        # Manage branches.
+# alias gc='git commit'        # Record changes to the repository.
+# alias gd='git diff'          # Show changes between commits.

@@ -1,0 +1,91 @@
+"--------------------------------------
+" Plugin Manager (vim-plug)
+"--------------------------------------
+" Plugins are currently commented out. To enable, uncomment these lines
+" and run :PlugInstall from within Vim.
+
+" call plug#begin('~/.vim/plugged')
+" Plug 'frazrepo/vim-rainbow'
+" Plug 'preservim/nerdcommenter'
+" Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+" call plug#end()
+
+
+"--------------------------------------
+" Core Editor Settings
+"--------------------------------------
+set encoding=utf-8              " Set the default file encoding to UTF-8.
+set number                      " Display line numbers on the left.
+set relativenumber              " Display relative line numbers for easier jumping.
+set mouse=a                     " Enable mouse support in all modes.
+set wrap                        " Wrap long lines of text.
+set showmatch                   " Briefly jump to matching brackets.
+set lazyredraw                  " Redraw screen only when necessary to improve performance.
+set wildmenu                    " Show a graphical menu for command-line completion.
+set ruler                       " Always show cursor position in the status line.
+set noswapfile                  " Disable the creation of swap files.
+set viminfofile=$XDG_STATE_HOME/vim/viminfo " Use XDG path for viminfo file.
+" set visualbell                " Use a visual flash instead of an audible beep for errors.
+
+
+"--------------------------------------
+" Search Behavior
+"--------------------------------------
+set incsearch                   " Show search results as you type.
+set hlsearch                    " Highlight all search matches.
+
+" Un-highlight search results by pressing Enter in normal mode.
+nnoremap <CR> :nohlsearch<CR><CR>
+
+
+"--------------------------------------
+" Indentation & Tabs
+"--------------------------------------
+set expandtab                   " Use spaces instead of tab characters.
+set tabstop=4                   " Number of spaces a <Tab> in the file counts for.
+set shiftwidth=4                " Number of spaces to use for each step of indent.
+set softtabstop=4               " Number of spaces that <Tab> inserts/deletes in insert mode.
+set autoindent                  " Copy indent from current line when starting a new line.
+set smartindent                 " Be smart about indentation.
+
+
+"--------------------------------------
+" Appearance & UI
+"--------------------------------------
+syntax enable                   " Enable syntax highlighting.
+" set laststatus=2              " Always display the status line.
+" set cursorline                " Highlight the current line.
+" set background=dark           " Use colors suitable for a dark background.
+
+" --- Colorscheme ---
+" Place colorscheme files in ~/.vim/colors/ to use them.
+" colorscheme gruvbox
+
+" --- Material Theme Example (requires plugin) ---
+" if (has('termguicolors'))
+"   set termguicolors
+" endif
+" let g:material_theme_style = 'lighter'
+" colorscheme material
+
+
+"--------------------------------------
+" Key Mappings
+"--------------------------------------
+" Move by visual lines rather than logical lines when lines are wrapped.
+nmap j gj
+nmap k gk
+
+
+"--------------------------------------
+" Filetype-Specific Settings
+"--------------------------------------
+" Enable filetype detection, plugins, and indentation rules.
+filetype plugin indent on
+
+
+"--------------------------------------
+" Miscellaneous
+"--------------------------------------
+" These settings can be enabled if desired.
+" set autoread                  " Automatically re-read files changed outside of Vim.
