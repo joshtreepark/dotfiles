@@ -1,0 +1,107 @@
+colorscheme catppuccin_mocha
+
+# display line numbers
+add-highlighter global/ number-lines -hlcursor -relative -separator "  " -cursor-separator " |"
+
+# # Use relative line numbers in normal mode
+# hook global ModeChange pop:insert:normal %{
+#     remove-highlighter window/ number-lines
+#     add-highlighter window/ number-lines -relative
+# }
+
+# # Switch to absolute line numbers in insert mode
+# hook global ModeChange push:normal:insert %{
+#     remove-highlighter window/ number-lines
+#     add-highlighter window/ number-lines
+# }
+
+# show matching symbols
+add-highlighter global/ show-matching
+
+# display each tab character as 4 spaces
+set-option global tabstop 4
+
+# change clippy
+set-option global ui_options terminal_assistant=cat
+
+# turn off autocompletion in INSERT mode. Use <C-n> to "prompt" suggestions
+# set-option global autocomplete prompt
+
+# from https://discuss.kakoune.com/t/resolved-changing-cursor-style-depending-on-mode/287/7
+# set cursor to underline
+# hook global InsertIdle .* %{
+#   set-face window PrimaryCursor default,default+u
+#   set-face window PrimaryCursorEol default,default+u
+#   set-face window SecondaryCursor default,default+u
+#   set-face window SecondaryCursorEol default,default+u
+#   set-face window LineNumberCursor default,default+u
+#   set-face window PrimarySelection default,default+u
+#   set-face window SecondarySelection default,default+u
+# }
+
+# # set cursor to default
+# hook global NormalIdle .* %{
+#   set-face window PrimaryCursor default,default+r
+#   set-face window PrimaryCursorEol default,default+r
+#   set-face window SecondaryCursor default,default+r
+#   set-face window SecondaryCursorEol default,default+r
+#   set-face window LineNumberCursor default,default+r
+#   set-face window PrimarySelection default,default+r
+#   set-face window SecondarySelection default,default+r
+# }
+
+# System clipboard copy / paste for MacOS (use xclip, xsel for Linux)
+map global user y '<a-|>pbcopy<ret>' -docstring 'yank (system clipboard)'
+map global user P '!pbpaste<ret>' -docstring 'paste (system clipboard)'
+map global user p '<a-!>pbpaste<ret>' -docstring 'paste append (system clipboard)'
+
+
+# Enable kakoune-lsp
+eval %sh{kak-lsp}
+lsp-enable
+
+# keymaps for lsp
+map global user l ':enter-user-mode lsp<ret>' -docstring 'LSP mode'
+
+map global insert <tab> '<a-;>:try lsp-snippets-select-next-placeholders catch %{ execute-keys -with-hooks <lt>tab> }<ret>' -docstring 'Select next snippet placeholder'
+
+map global object a '<a-semicolon>lsp-object<ret>' -docstring 'LSP any symbol'
+map global object <a-a> '<a-semicolon>lsp-object<ret>' -docstring 'LSP any symbol'
+map global object f '<a-semicolon>lsp-object Function Method<ret>' -docstring 'LSP function or method'
+map global object t '<a-semicolon>lsp-object Class Interface Struct<ret>' -docstring 'LSP class interface or struct'
+map global object d '<a-semicolon>lsp-diagnostic-object --include-warnings<ret>' -docstring 'LSP errors and warnings'
+map global object D '<a-semicolon>lsp-diagnostic-object<ret>' -docstring 'LSP errors'
+
+# LaTeX writes on save
+hook global WinSetOption filetype=latex %{ hook global BufWritePost .* %{ texlab-build } }
+
+# fix hightlighting for zsh files
+hook global BufOpenFile .*.(zshenv|zshrc) %{
+    set-option buffer filetype sh
+}
+
+# command to sync colorscheme based on light/dark mode
+define-command sync-macos-appearance %{
+    evaluate-commands %sh{
+        if [ "$(uname)" = "Darwin" ]; then
+            if [ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = "Dark" ]; then
+                echo "colorscheme gruvbox-dark"
+            else
+                echo "colorscheme solarized-light"
+            fi
+        else
+            echo "colorscheme gruvbox-dark"
+        fi
+    }
+}
+
+# Markdown: Set colorscheme and text wrapping for Markdown files
+hook global WinCreate .*\.(md|markdown) %{
+    # Set the colorscheme to gruvbox for markdown files
+    sync-macos-appearance
+    # colorscheme solarized-light
+    # Automatically wrap lines at 80 characters
+    add-highlighter buffer/ wrap -word -width 80
+    # turn off autocompletion in INSERT mode. Use <C-n> to "prompt" suggestions
+    set-option global autocomplete prompt
+}
