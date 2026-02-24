@@ -108,7 +108,7 @@ fi
 source <(fzf --zsh)
 
 # Source iTerm2 shell integration if it exists.
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+test -e "${HOME}/.local/share/iterm2/.iterm2_shell_integration.zsh" && source "${HOME}/.local/share/iterm2/.iterm2_shell_integration.zsh"
 
 # --- Custom Functions ---
 

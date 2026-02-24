@@ -41,6 +41,9 @@ export R_LIBS_USER="$XDG_DATA_HOME/R/library"         # User library path for pa
 export R_HISTFILE="$XDG_STATE_HOME/R/history"         # R command history file.
 export R_MAKEVARS_USER="$XDG_CONFIG_HOME/R/Makevars"  # User-specific Makefile variables.
 
+# --- Homebrew ---
+export HOMEBREW_NO_UPDATE_REPORT_NEW=1
+
 # --- Global Protect VPN Script ---
 
 globalprotect() {
