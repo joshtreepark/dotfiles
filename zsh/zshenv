@@ -14,7 +14,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 # --- Shell & Editor Configuration ---
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"         # Sets the Zsh config directory.
 export DOTFILES="$HOME/.dots"                 # Defines the location of your dotfiles.
-export VISUAL="vim"                           # Sets the default text editor.
+export VISUAL="kak"                           # Sets the default text editor.
 
 #--------------------------------------
 # Application-Specific Settings
