@@ -3,13 +3,16 @@
 #--------------------------------------
 
 # Set Vi keybindings for command-line editing.
-bindkey -v
-export KEYTIMEOUT=1 # Reduces delay for escape key in terminal.
+# bindkey -v
+# export KEYTIMEOUT=1 # Reduces delay for escape key in terminal.
 
 # Use vim to edit long commands by pressing 'v' in normal mode.
-autoload -Uz edit-command-line
-zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
+# autoload -Uz edit-command-line
+# zle -N edit-command-line
+# bindkey -M vicmd v edit-command-line
+
+# Set Emacs keybindings
+bindkey -e
 
 # --- Directory and Globbing Options ---
 setopt AUTO_CD              # Go to a directory by typing its name.
@@ -44,17 +47,17 @@ fi
 # History
 #--------------------------------------
 
-export HISTSIZE=10000                             # Max events stored in current session.
-export SAVEHIST=10000                             # Max events saved to the history file.
+export HISTSIZE=10000             # Max events stored in current session.
+export SAVEHIST=10000             # Max events saved to the history file.
 
-setopt EXTENDED_HISTORY          # Save timestamp and duration for each command.
-setopt SHARE_HISTORY             # Share history across all open shells instantly.
-setopt HIST_EXPIRE_DUPS_FIRST    # When trimming history, remove duplicates first.
-setopt HIST_IGNORE_ALL_DUPS      # If a new command is a duplicate, remove the old one.
-setopt HIST_FIND_NO_DUPS         # When searching, don't show duplicate entries.
-setopt HIST_IGNORE_SPACE         # Don't save commands that start with a space.
-setopt HIST_SAVE_NO_DUPS         # Don't write duplicate events to the history file.
-setopt HIST_VERIFY               # Show a command before running it from history.
+setopt EXTENDED_HISTORY           # Save timestamp and duration for each command.
+setopt SHARE_HISTORY              # Share history across all open shells instantly.
+setopt HIST_EXPIRE_DUPS_FIRST     # When trimming history, remove duplicates first.
+setopt HIST_IGNORE_ALL_DUPS       # If a new command is a duplicate, remove the old one.
+setopt HIST_FIND_NO_DUPS          # When searching, don't show duplicate entries.
+setopt HIST_IGNORE_SPACE          # Don't save commands that start with a space.
+setopt HIST_SAVE_NO_DUPS          # Don't write duplicate events to the history file.
+setopt HIST_VERIFY                # Show a command before running it from history.
 
 #--------------------------------------
 # Aliases
