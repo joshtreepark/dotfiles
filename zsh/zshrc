@@ -24,16 +24,18 @@ setopt EXTENDED_GLOB        # Enable more advanced globbing features.
 setopt CORRECT              # Enable spelling correction for commands.
 
 #--------------------------------------
-# Shell State & Caching (XDG)
+# Shell State & Caching
 #--------------------------------------
-# Use XDG Base Directory paths for history and completion cache files.
 
-# Ensure the state directory for Zsh exists.
+# Checks for XDG Base Directory paths for history and cache files.
+[ -d "$XDG_CACHE_HOME/zsh" ] || mkdir -p "$XDG_CACHE_HOME/zsh"
 [ -d "$XDG_STATE_HOME/zsh" ] || mkdir -p "$XDG_STATE_HOME/zsh"
+[ -d "$XDG_STATE_HOME/less" ] || mkdir -p "$XDG_STATE_HOME/less"
+[ -d "$XDG_STATE_HOME/R" ] || mkdir -p "$XDG_STATE_HOME/R"
+[ -d "$XDG_STATE_HOME/python" ] || mkdir -p "$XDG_STATE_HOME/python"
+
 HISTFILE="$XDG_STATE_HOME/zsh/history"
 
-# Ensure the cache directory for Zsh exists.
-[ -d "$XDG_CACHE_HOME/zsh" ] || mkdir -p "$XDG_CACHE_HOME/zsh"
 zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' # Case-insensitive tab completion.
 
@@ -60,22 +62,6 @@ setopt HIST_SAVE_NO_DUPS          # Don't write duplicate events to the history 
 setopt HIST_VERIFY                # Show a command before running it from history.
 
 #--------------------------------------
-# Aliases
-#--------------------------------------
-
-# Source custom aliases from a centralized dotfiles location.
-if [[ -n "$DOTFILES" && -d "$DOTFILES" ]]; then
-	source "$DOTFILES/aliases/aliases"
-else
-	print -u2 "warning: \$DOTFILES not set or not a directory; skipping custom aliases."
-fi
-
-# Source a local aliases file for machine-specific overrides.
-if [[ -f "$ZDOTDIR/local_aliases" ]] ; then
-	source "$ZDOTDIR/local_aliases"
-fi
-
-#--------------------------------------
 # Prompt & Appearance
 #--------------------------------------
 
@@ -87,31 +73,67 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 # PATH Configuration
 #--------------------------------------
 
-# Prepend user-specific bin directories to the PATH.
-path=(
-  /usr/local/opt/ruby/bin  # Homebrew Ruby (prepend)
+typeset -U path # Ensures path entries are unique
+path_candidates=(
+  /usr/local/opt/ruby/bin # Homebrew Ruby (prepend) for Intel Macs
   "$HOME/.local/bin"
   "$HOME/bin"
   /usr/local/sbin
-  "$path[@]" # Include the existing system path.
 )
+# Only add paths to the array if the directory exists
+for dir in $path_candidates; do
+  [[ -d "$dir" ]] && path=("$dir" $path)
+done
 export PATH
 
+# path=(
+#   /usr/local/opt/ruby/bin
+#   "$HOME/.local/bin"
+#   "$HOME/bin"
+#   /usr/local/sbin
+#   "$path[@]" # Include the existing system path.
+# )
+# export PATH
+
 #--------------------------------------
-# Functions & Plugins
+# Functions
 #--------------------------------------
 
-# --- Source Plugins ---
-if [[ -n "$DOTFILES" && -d "$DOTFILES" ]]; then
+# Source custom aliases and functions
+if [[ -d "$DOTFILES" ]]; then
+	source "$DOTFILES/aliases/aliases"
     source "$DOTFILES/zsh/plugins/bd.zsh"
     source "$DOTFILES/zsh/plugins/cursor_mode.zsh"
+else
+	print -u2 "warning: \$DOTFILES not set or not a directory; skipping custom aliases and functions."
+fi
+
+# Source a local aliases file for machine-specific overrides.
+if [[ -f "$ZDOTDIR/local_aliases" ]] ; then
+	source "$ZDOTDIR/local_aliases"
 fi
 
 # Initialize fzf keybindings and completions.
-source <(fzf --zsh)
+# source <(fzf --zsh)
+if command -v fzf >/dev/null; then
+  # Static sourcing is faster than source <(fzf --zsh)
+  [[ -f "$XDG_CONFIG_HOME/zsh/fzf_setup.zsh" ]] || fzf --zsh > "$XDG_CONFIG_HOME/zsh/fzf_setup.zsh"
+  source "$XDG_CONFIG_HOME/zsh/fzf_setup.zsh"
+fi
 
 # Source iTerm2 shell integration if it exists.
-test -e "${HOME}/.local/share/iterm2/.iterm2_shell_integration.zsh" && source "${HOME}/.local/share/iterm2/.iterm2_shell_integration.zsh"
+# test -e "${HOME}/.local/share/iterm2/.iterm2_shell_integration.zsh" && source "${HOME}/.local/share/iterm2/.iterm2_shell_integration.zsh"
+[[ -f "${HOME}/.local/share/iterm2/.iterm2_shell_integration.zsh" ]] && \
+    source "${HOME}/.local/share/iterm2/.iterm2_shell_integration.zsh"
+
+# yazi shell integration
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
 
 # --- Custom Functions ---
 
@@ -134,4 +156,25 @@ fo() {
   if [[ -n "$file" ]]; then
     open "$file"
   fi
+}
+
+# --- Global Protect VPN Script ---
+globalprotect() {
+    if [ "$1" = "stop" ]; then
+        launchctl bootout gui/$(id -u) /Library/LaunchAgents/com.paloaltonetworks.gp.pangps.plist > /dev/null 2>&1
+        launchctl bootout gui/$(id -u) /Library/LaunchAgents/com.paloaltonetworks.gp.pangpa.plist > /dev/null 2>&1
+        PID="$(launchctl list | grep palo | cut -f 1)"
+
+        # Kill the processes IDs only if found
+        if [ ! -z "$PID" ]; then
+                kill -9 $PID
+        fi
+
+        echo "VPN unloaded"
+    elif [ "$1" = "start" ]; then
+        launchctl bootstrap gui/$(id -u) /Library/LaunchAgents/com.paloaltonetworks.gp.pangps.plist
+        launchctl bootstrap gui/$(id -u) /Library/LaunchAgents/com.paloaltonetworks.gp.pangpa.plist
+        open -a /Applications/GlobalProtect.app
+        echo "VPN loaded"
+    fi
 }

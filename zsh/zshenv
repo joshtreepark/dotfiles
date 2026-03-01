@@ -14,27 +14,20 @@ export XDG_CACHE_HOME="$HOME/.cache"
 # --- Shell & Editor Configuration ---
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"         # Sets the Zsh config directory.
 export DOTFILES="$HOME/.dots"                 # Defines the location of your dotfiles.
-export VISUAL="kak"                           # Sets the default text editor.
+# export EDITOR="kak"                         # Sets the default simple text editor.
+export VISUAL="kak"                           # Sets the default full-screen text editor.
 
 #--------------------------------------
-# Application-Specific Settings
+# Application-Specific Environmental Variables
 #--------------------------------------
 
 # --- Python ---
-# Use XDG-compliant paths for Python's history file.
-[ -d "$XDG_STATE_HOME/python" ] || mkdir -p "$XDG_STATE_HOME/python"
 export PYTHON_HISTORY="$XDG_STATE_HOME/python/history"
-# export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME/python" # NOTE: Can break Homebrew Python.
-# export PYTHONUSERBASE="$XDG_DATA_HOME/python"
 
 # --- Less ---
-# Use an XDG path for the 'less' command's history file.
-[ -d "$XDG_STATE_HOME/less" ] || mkdir -p "$XDG_STATE_HOME/less"
 export LESSHISTFILE="$XDG_STATE_HOME/less/history"
 
 # --- R Language ---
-# Configure R to use XDG-compliant directories for its various files.
-[ -d "$XDG_STATE_HOME/R" ] || mkdir -p "$XDG_STATE_HOME/R"
 export R_PROFILE_USER="$XDG_CONFIG_HOME/R/Rprofile"   # R profile script path.
 export R_ENVIRON_USER="$XDG_CONFIG_HOME/R/Renviron"   # R environment variables.
 export R_LIBS_USER="$XDG_DATA_HOME/R/library"         # User library path for packages.
@@ -43,25 +36,3 @@ export R_MAKEVARS_USER="$XDG_CONFIG_HOME/R/Makevars"  # User-specific Makefile v
 
 # --- Homebrew ---
 export HOMEBREW_NO_UPDATE_REPORT_NEW=1
-
-# --- Global Protect VPN Script ---
-
-globalprotect() {
-    if [ "$1" = "stop" ]; then
-        launchctl bootout gui/$(id -u) /Library/LaunchAgents/com.paloaltonetworks.gp.pangps.plist > /dev/null 2>&1
-        launchctl bootout gui/$(id -u) /Library/LaunchAgents/com.paloaltonetworks.gp.pangpa.plist > /dev/null 2>&1
-        PID="$(launchctl list | grep palo | cut -f 1)"
-
-        # Kill the processes IDs only if found
-        if [ ! -z "$PID" ]; then
-                kill -9 $PID
-        fi
-
-        echo "VPN unloaded"
-    elif [ "$1" = "start" ]; then
-        launchctl bootstrap gui/$(id -u) /Library/LaunchAgents/com.paloaltonetworks.gp.pangps.plist
-        launchctl bootstrap gui/$(id -u) /Library/LaunchAgents/com.paloaltonetworks.gp.pangpa.plist
-        open -a /Applications/GlobalProtect.app
-        echo "VPN loaded"
-    fi
-}
