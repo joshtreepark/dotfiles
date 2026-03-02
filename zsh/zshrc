@@ -105,7 +105,7 @@ if [[ -d "$DOTFILES" ]]; then
     source "$DOTFILES/zsh/plugins/bd.zsh"
     source "$DOTFILES/zsh/plugins/cursor_mode.zsh"
 else
-	print -u2 "warning: \$DOTFILES not set or not a directory; skipping custom aliases and functions."
+	print -u2 "warning: \$DOTFILES directory does not exist; skipping custom aliases and functions."
 fi
 
 # Source a local aliases file for machine-specific overrides.
@@ -114,15 +114,13 @@ if [[ -f "$ZDOTDIR/local_aliases" ]] ; then
 fi
 
 # Initialize fzf keybindings and completions.
-# source <(fzf --zsh)
+# Static sourcing is faster than source <(fzf --zsh)
 if command -v fzf >/dev/null; then
-  # Static sourcing is faster than source <(fzf --zsh)
   [[ -f "$XDG_CONFIG_HOME/zsh/fzf_setup.zsh" ]] || fzf --zsh > "$XDG_CONFIG_HOME/zsh/fzf_setup.zsh"
   source "$XDG_CONFIG_HOME/zsh/fzf_setup.zsh"
 fi
 
 # Source iTerm2 shell integration if it exists.
-# test -e "${HOME}/.local/share/iterm2/.iterm2_shell_integration.zsh" && source "${HOME}/.local/share/iterm2/.iterm2_shell_integration.zsh"
 [[ -f "${HOME}/.local/share/iterm2/.iterm2_shell_integration.zsh" ]] && \
     source "${HOME}/.local/share/iterm2/.iterm2_shell_integration.zsh"
 
