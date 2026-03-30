@@ -1,4 +1,8 @@
-colorscheme catppuccin_mocha
+# colorscheme catppuccin_mocha
+
+# Force the main UI to use terminal colors
+set-face global Default default,default
+set-face global BufferPadding default,default
 
 # display line numbers
 add-highlighter global/ number-lines -hlcursor -relative -separator "  " -cursor-separator " |"
@@ -81,24 +85,24 @@ hook global BufOpenFile .*.(zshenv|zshrc) %{
 }
 
 # command to sync colorscheme based on light/dark mode
-define-command sync-macos-appearance %{
-    evaluate-commands %sh{
-        if [ "$(uname)" = "Darwin" ]; then
-            if [ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = "Dark" ]; then
-                echo "colorscheme gruvbox-dark"
-            else
-                echo "colorscheme solarized-light"
-            fi
-        else
-            echo "colorscheme gruvbox-dark"
-        fi
-    }
-}
+# define-command sync-macos-appearance %{
+#     evaluate-commands %sh{
+#         if [ "$(uname)" = "Darwin" ]; then
+#             if [ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = "Dark" ]; then
+#                 echo "colorscheme gruvbox-dark"
+#             else
+#                 echo "colorscheme solarized-light"
+#             fi
+#         else
+#             echo "colorscheme gruvbox-dark"
+#         fi
+#     }
+# }
 
 # Markdown: Set colorscheme and text wrapping for Markdown files
 hook global WinCreate .*\.(md|markdown) %{
     # Set the colorscheme to gruvbox for markdown files
-    sync-macos-appearance
+    # sync-macos-appearance
     # colorscheme solarized-light
     # Automatically wrap lines at 80 characters
     add-highlighter buffer/ wrap -word -width 80
