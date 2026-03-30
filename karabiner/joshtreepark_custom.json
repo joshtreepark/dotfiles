@@ -199,6 +199,127 @@
           "type": "basic"
         }
       ]
+    },
+    {
+      "description": "fn+(uiop) - Buffered Language Switch (Fixes No-Switch Bug)",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "input_sources": [
+                { "input_source_id": "com.apple.keylayout.USExtended" }
+              ],
+              "type": "input_source_unless"
+            }
+          ],
+          "from": {
+            "key_code": "p",
+            "modifiers": { "mandatory": ["fn"] }
+          },
+          "to": [
+            {
+              "select_input_source": {
+                "input_source_id": "com.apple.keylayout.USExtended"
+              }
+            }
+          ],
+          "to_after_key_up": [
+            {
+              "select_input_source": {
+                "input_source_id": "com.apple.keylayout.USExtended"
+              }
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "conditions": [
+            {
+              "input_sources": [
+                { "input_source_id": "com.apple.inputmethod.Korean.2SetKorean" }
+              ],
+              "type": "input_source_unless"
+            }
+          ],
+          "from": {
+            "key_code": "o",
+            "modifiers": { "mandatory": ["fn"] }
+          },
+          "to": [
+            {
+              "select_input_source": {
+                "input_source_id": "com.apple.inputmethod.Korean.2SetKorean"
+              }
+            }
+          ],
+          "to_after_key_up": [
+            {
+              "select_input_source": {
+                "input_source_id": "com.apple.inputmethod.Korean.2SetKorean"
+              }
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "conditions": [
+            {
+              "input_sources": [
+                { "input_source_id": "com.apple.inputmethod.SCIM.ITABC" }
+              ],
+              "type": "input_source_unless"
+            }
+          ],
+          "from": {
+            "key_code": "i",
+            "modifiers": { "mandatory": ["fn"] }
+          },
+          "to": [
+            {
+              "select_input_source": {
+                "input_source_id": "com.apple.inputmethod.SCIM.ITABC"
+              }
+            }
+          ],
+          "to_after_key_up": [
+            {
+              "select_input_source": {
+                "input_source_id": "com.apple.inputmethod.SCIM.ITABC"
+              }
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "conditions": [
+            {
+              "input_sources": [
+                { "input_source_id": "com.apple.inputmethod.TCIM.Pinyin" }
+              ],
+              "type": "input_source_unless"
+            }
+          ],
+          "from": {
+            "key_code": "u",
+            "modifiers": { "mandatory": ["fn"] }
+          },
+          "to": [
+            {
+              "select_input_source": {
+                "input_source_id": "com.apple.inputmethod.TCIM.Pinyin"
+              }
+            }
+          ],
+          "to_after_key_up": [
+            {
+              "select_input_source": {
+                "input_source_id": "com.apple.inputmethod.TCIM.Pinyin"
+              }
+            }
+          ],
+          "type": "basic"
+        }
+      ]
     }
   ]
 }
