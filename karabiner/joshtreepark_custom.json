@@ -2,7 +2,7 @@
   "title": "joshtreepark custom keybindings",
   "rules": [
     {
-      "description": "Simultaneously press right and left shift to enable caps_lock (broken)", 
+      "description": "Simultaneously press right and left shift to enable caps_lock (broken)",
       "manipulators": [
         {
           "type": "basic",
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "description": "Toggle caps_lock by holding left_shift then pressing right_shift",
+      "description": "Toggle caps_lock by holding left_shift then pressing right_shift (buggy)",
       "manipulators": [
         {
           "from": {
@@ -38,12 +38,8 @@
               "optional": ["caps_lock"]
             }
           },
-          "to": [
-            {"key_code": "caps_lock"}
-          ],
-          "to_if_alone": [
-            {"key_code": "right_shift"}
-          ],
+          "to": [{ "key_code": "caps_lock" }],
+          "to_if_alone": [{ "key_code": "right_shift" }],
           "type": "basic"
         }
       ]
@@ -56,9 +52,7 @@
           "from": {
             "key_code": "caps_lock",
             "modifiers": {
-              "optional": [
-                "any"
-              ]
+              "optional": ["any"]
             }
           },
           "to": [
@@ -74,7 +68,7 @@
           ]
         }
       ]
-    }, 
+    },
     {
       "description": "Hold space for control",
       "manipulators": [
@@ -83,9 +77,7 @@
           "from": {
             "key_code": "spacebar",
             "modifiers": {
-              "optional": [
-                "any"
-              ]
+              "optional": ["any"]
             }
           },
           "to": [
@@ -103,41 +95,110 @@
       ]
     },
     {
-       "description": "fn+# will set input_source (change keyboard language)",
-       "manipulators": [
-           {
-               "from": {
-                   "key_code": "0",
-                   "modifiers": { "mandatory": ["fn"] }
-               },
-               "to": [{ "shell_command": "/usr/local/bin/macism com.apple.keylayout.USExtended 0" }],
-               "type": "basic"
-           },
-           {
-               "from": {
-                   "key_code": "9",
-                   "modifiers": { "mandatory": ["fn"] }
-               },
-               "to": [{ "shell_command": "/usr/local/bin/macism com.apple.inputmethod.Korean.2SetKorean 0" }],
-               "type": "basic"
-           },
-           {
-               "from": {
-                   "key_code": "8",
-                   "modifiers": { "mandatory": ["fn"] }
-               },
-               "to": [{ "shell_command": "/usr/local/bin/macism com.apple.inputmethod.SCIM.ITABC 0" }],
-               "type": "basic"
-           },
-           {
-               "from": {
-                   "key_code": "7",
-                   "modifiers": { "mandatory": ["fn"] }
-               },
-               "to": [{ "shell_command": "/usr/local/bin/macism com.apple.inputmethod.TCIM.Pinyin" }],
-               "type": "basic"
-           }
-       ]
+      "description": "fn+# will set input_source (change keyboard language)",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "0",
+            "modifiers": { "mandatory": ["fn"] }
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/macism com.apple.keylayout.USExtended 0"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "9",
+            "modifiers": { "mandatory": ["fn"] }
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/macism com.apple.inputmethod.Korean.2SetKorean 0"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "8",
+            "modifiers": { "mandatory": ["fn"] }
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/macism com.apple.inputmethod.SCIM.ITABC 0"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "7",
+            "modifiers": { "mandatory": ["fn"] }
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/macism com.apple.inputmethod.TCIM.Pinyin"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "fn+(uiop) will set input_source (change keyboard language)",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "p",
+            "modifiers": { "mandatory": ["fn"] }
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/macism com.apple.keylayout.USExtended"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "o",
+            "modifiers": { "mandatory": ["fn"] }
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/macism com.apple.inputmethod.Korean.2SetKorean"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "i",
+            "modifiers": { "mandatory": ["fn"] }
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/macism com.apple.inputmethod.SCIM.ITABC"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "u",
+            "modifiers": { "mandatory": ["fn"] }
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/macism com.apple.inputmethod.TCIM.Pinyin"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
     }
   ]
 }
