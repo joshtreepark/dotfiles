@@ -1,3 +1,5 @@
+# Performance Check (uncomment this and last line)
+# zmodload zsh/zprof
 #--------------------------------------
 # Navigation & Editing
 #--------------------------------------
@@ -115,14 +117,34 @@ fi
 
 # Initialize fzf keybindings and completions.
 # Static sourcing is faster than source <(fzf --zsh)
+# Optimized fzf Load with 30-day Auto-Refresh
 if command -v fzf >/dev/null; then
-  [[ -f "$XDG_CONFIG_HOME/zsh/fzf_setup.zsh" ]] || fzf --zsh > "$XDG_CONFIG_HOME/zsh/fzf_setup.zsh"
-  source "$XDG_CONFIG_HOME/zsh/fzf_setup.zsh"
+  local fzf_cache="$XDG_CONFIG_HOME/zsh/fzf_setup.zsh"
+
+  # If the file doesn't exist OR it was modified more than 30 days ago
+  if [[ ! -f "$fzf_cache" || -n "$(find "$fzf_cache" -mtime +30 2>/dev/null)" ]]; then
+    fzf --zsh >| "$fzf_cache"
+  fi
+
+  source "$fzf_cache"
+fi
+
+# Zoxide initialization
+# Optimized Zoxide Load with 30-day Auto-Refresh
+if command -v zoxide >/dev/null; then
+  local z_cache="$XDG_CONFIG_HOME/zsh/zoxide_setup.zsh"
+
+  # If the file doesn't exist OR it was modified more than 30 days ago
+  if [[ ! -f "$z_cache" || -n "$(find "$z_cache" -mtime +30 2>/dev/null)" ]]; then
+    zoxide init zsh >| "$z_cache"
+  fi
+
+  source "$z_cache"
 fi
 
 # Source iTerm2 shell integration if it exists.
-[[ -f "${HOME}/.local/share/iterm2/.iterm2_shell_integration.zsh" ]] && \
-    source "${HOME}/.local/share/iterm2/.iterm2_shell_integration.zsh"
+# [[ -f "${HOME}/.local/share/iterm2/.iterm2_shell_integration.zsh" ]] && \
+#    source "${HOME}/.local/share/iterm2/.iterm2_shell_integration.zsh"
 
 # yazi shell integration
 function y() {
@@ -176,3 +198,6 @@ globalprotect() {
         echo "VPN loaded"
     fi
 }
+
+# End performance check
+# zprof
