@@ -9,10 +9,12 @@ zshrc is where most of the customizations exist.
 
 **Instructions**
 
+IMPORTANT: need to do BOTH steps!
+
 1. Symlink `zshenv` file in the `$HOME` directory as `.zshenv`
 
 ```{sh}
-ln -s .dots/zshenv ~/.zshenv
+ln -s ~/.dots/zsh/zshenv ~/.zshenv
 ```
 
 2. Symlink `zshrc` file to `$XDG_CONFIG_HOME/zsh/.zshrc`
