@@ -1,0 +1,10 @@
+[user]
+	name = Josh
+[merge]
+	tool = vscodium
+[mergetool "vscodium"]
+	cmd = codium --wait $MERGED
+[diff]
+	tool = vscodium
+[difftool "vscodium"]
+	cmd = codium --wait --diff $LOCAL $REMOTE
